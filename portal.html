@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Portal</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b') no-repeat center center/cover;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 320px;
+    margin: 80px auto;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+#dashboard {
+    display: none;
+}
+
+.card {
+    background: #ffffff;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container" id="loginBox">
+    <h2>🎓 Student Login</h2>
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button onclick="login()">Login</button>
+    <p id="error" style="color:red;"></p>
+</div>
+
+<div class="container" id="dashboard">
+    <h2>📊 Student Dashboard</h2>
+
+    <div class="card" id="attendance"></div>
+    <div class="card" id="fee"></div>
+    <div class="card" id="result"></div>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+
+// 8 Students Data
+const students = {
+    "zohaib": {
+        password: "123",
+        attendance: "90%",
+        fee: "Paid",
+        result: "85 Marks"
+    },
+    "ali": {
+        password: "111",
+        attendance: "85%",
+        fee: "Pending",
+        result: "78 Marks"
+    },
+    "ahmad": {
+        password: "222",
+        attendance: "92%",
+        fee: "Paid",
+        result: "88 Marks"
+    },
+    "usman": {
+        password: "333",
+        attendance: "80%",
+        fee: "Pending",
+        result: "70 Marks"
+    },
+    "hamza": {
+        password: "444",
+        attendance: "87%",
+        fee: "Paid",
+        result: "82 Marks"
+    },
+    "bilal": {
+        password: "555",
+        attendance: "95%",
+        fee: "Paid",
+        result: "90 Marks"
+    },
+    "zain": {
+        password: "666",
+        attendance: "83%",
+        fee: "Pending",
+        result: "76 Marks"
+    },
+    "hassan": {
+        password: "777",
+        attendance: "89%",
+        fee: "Paid",
+        result: "84 Marks"
+    }
+};
+
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if (students[user] && students[user].password === pass) {
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+        document.getElementById("attendance").innerHTML =
+            "<b>📅 Attendance:</b> " + students[user].attendance;
+
+        document.getElementById("fee").innerHTML =
+            "<b>💰 Fee Status:</b> " + students[user].fee;
+
+        document.getElementById("result").innerHTML =
+            "<b>📖 Result:</b> " + students[user].result;
+
+    } else {
+        document.getElementById("error").innerText = "❌ Invalid Username or Password";
+    }
+}
+
+function logout() {
+    document.getElementById("loginBox").style.display = "block";
+    document.getElementById("dashboard").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
